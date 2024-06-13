@@ -1,7 +1,10 @@
-import { Application, Request, Response } from "express";
+import {Express, Router} from 'express';
+import roomRoutes from "../routs/roomRoutes";
+import bookingRoutes from "../routs/bookingRoutes";
 
-export const loadApiEndpoints = (app: Application): void => {
-	app.get("/api", (req: Request, res: Response) => {
-		return res.status(200).send({"msg" :"hi there!"});
-	});
-};
+export function loadApiEndpoints(app: Express): void {
+  const router = Router();
+  router.use('/rooms', roomRoutes);
+  router.use('/bookings', bookingRoutes);
+  app.use('/api', router);
+}
