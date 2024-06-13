@@ -1,13 +1,6 @@
-import { Request, Response } from 'express';
+import {Request, Response} from 'express';
 import {Booking} from "../models/booking";
-import {Room} from "../models/room";
-
-let rooms: Room[] = [
-  new Room(1, 'Room A'),
-  new Room(2, 'Room B'),
-  new Room(3, 'Room C'),
-  new Room(4, 'Room D')
-];
+import {rooms} from "../models/room";
 
 let bookings: Booking[] = [];
 
