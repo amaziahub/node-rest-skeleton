@@ -34,6 +34,6 @@ we transfer - Book a Room - Technical Assessment
 - Via test suites - run `npm run test` in order to test the api specs
 
 # Solution approach
-- approach to this solution is to get the green path working and then improve over time.
+- approach to this solution is to get the green path working as fast as you can to meet deadline and then improve over time.
 - created a skeleton with all parts needed for the backend: controllers, routes, and test files
 - because of time constraint I didn't add a database layer and data saved in memory map, if I had more time I would add sqlite since scale is not the issue here
