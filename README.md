@@ -12,8 +12,22 @@ we transfer - Book a Room - Technical Assessment
 
 # API's
 - GET /api/rooms - should return all rooms in the system
-- GET /api/booking/available - should return all rooms that are available for booking
-- POST /api/booking/book - should enable to book a room given the request is valid
+- GET /api/bookings/available - should return all rooms that are available for booking for specific date
+- POST /api/bookings/book - should enable to book a room given the request is valid
+- GET /api/bookings/reset - reset bookings
+
+### Examples
+- http://localhost:3000/api/rooms
+- http://localhost:3000/api/bookings/available?date=2024-06-11
+- http://localhost:3000/api/bookings/book
+    ```json
+    {
+        "roomId" : 2,
+        "bookedBy" : "amazia",
+        "date" : "2024-06-11"
+    }
+    ```
+- http://localhost:3000/api/bookings/reset
 
 # Testing the app
 - Via rest API - pls use call the relevant apis pointed above

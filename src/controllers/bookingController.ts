@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {Booking, bookings} from "../models/booking";
+import {Booking, bookings, initBooking} from "../models/booking";
 import {rooms} from "../models/room";
 
 export const getAvailableRooms = (req: Request, res: Response) => {
@@ -7,6 +7,7 @@ export const getAvailableRooms = (req: Request, res: Response) => {
   const bookedRoomIds = bookings.filter(b => b.date === date).map(b => b.roomId);
   const availableRooms = rooms.filter(r => !bookedRoomIds.includes(r.id));
   res.json(availableRooms);
+
 };
 
 export const bookRoom = (req: Request, res: Response) => {
@@ -18,6 +19,11 @@ export const bookRoom = (req: Request, res: Response) => {
 
   res.status(204).send();
 };
+
+export const resetBooking = (req: Request, res: Response) => {
+  initBooking()
+  res.json(bookings);
+}
 
 function validateRoomExists(roomId: number, res: any) {
   const room = rooms.find(r => r.id === roomId);

@@ -2,16 +2,9 @@ import request from "supertest";
 
 import app from "../src/app";
 
-describe("Get /available", () => {
-
-	it("should return available rooms", async () => {
-		const response  = await request(app).get("/api/bookings/available");
-		expect(response.status).toBe(200);
-		expect(response.body.length).toBe(4);
-		expect(response.body[0].name).toBe("Room A");
-	});
-
-});
+beforeEach(async () => {
+	await request(app).get("/api/bookings/reset");
+})
 
 describe("Post /book", () => {
 
@@ -49,6 +42,22 @@ describe("Post /book", () => {
 		});
 		expect(second_response.status).toBe(400);
 		expect(second_response.text).toBe("Room is already booked for this date");
+	});
+
+});
+
+describe("Get /available", () => {
+
+	it("should return available rooms for specific date", async () => {
+		await request(app).post("/api/bookings/book").send({
+			roomId: 2,
+			date: '2024-06-11',
+			bookedBy: 'Julia'
+		});
+
+		const response  = await request(app).get("/api/bookings/available?date=2024-06-11");
+		expect(response.status).toBe(200);
+		expect(response.body.length).toBe(3);
 	});
 
 });
